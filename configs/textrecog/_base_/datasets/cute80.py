@@ -1,4 +1,4 @@
-cute80_rec_data_root = 'data/rec/ct80/'
+cute80_rec_data_root = 'data/recog/ct80/'
 
 cute80_rec_test = dict(
     type='OCRDataset',

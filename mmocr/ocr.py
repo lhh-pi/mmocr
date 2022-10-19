@@ -250,7 +250,7 @@ class MMOCR:
                 'ckpt':
                 'textdet/'
                 'dbnet/'
-                'dbnet_resnet50-dcnv2_fpnc_1200e_icdar2015'
+                # 'dbnet_resnet50-dcnv2_fpnc_1200e_icdar2015'
                 'dbnet_resnet50-dcnv2_fpnc_1200e_icdar2015_20220828_124917-452c443c.pth'  # noqa: E501
             },
             'DBPP_r50': {

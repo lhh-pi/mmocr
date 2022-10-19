@@ -12,12 +12,21 @@ _base_ = [
     '_base_crnn_mini-vgg.py',
 ]
 
+# 每 10 个 epoch 储存一次权重
+default_hooks = dict(checkpoint=dict(type='CheckpointHook', interval=100), )
+# 设置最大 epoch 数为 400，每 10 个 epoch 运行一次验证
+train_cfg = dict(type='EpochBasedTrainLoop', max_epochs=1000, val_interval=100)
+# 令学习率为常量，即不进行学习率衰减
+# param_scheduler = [dict(type='ConstantLR', factor=1.0),]
+
 # dataset settings
 train_list = [_base_.mj_rec_train]
+# test_list = [
+#     _base_.cute80_rec_test, _base_.iiit5k_rec_test, _base_.svt_rec_test,
+#     _base_.svtp_rec_test, _base_.ic13_rec_test, _base_.ic15_rec_test
+# ]
 test_list = [
-    _base_.cute80_rec_test, _base_.iiit5k_rec_test, _base_.svt_rec_test,
-    _base_.svtp_rec_test, _base_.ic13_rec_test, _base_.ic15_rec_test
-]
+    _base_.cute80_rec_test, ]
 
 default_hooks = dict(logger=dict(type='LoggerHook', interval=50), )
 
@@ -42,8 +51,11 @@ test_dataloader = dict(
         pipeline=_base_.test_pipeline))
 val_dataloader = test_dataloader
 
+# val_evaluator = dict(
+#     dataset_prefixes=['CUTE80', 'IIIT5K', 'SVT', 'SVTP', 'IC13', 'IC15'])
+
 val_evaluator = dict(
-    dataset_prefixes=['CUTE80', 'IIIT5K', 'SVT', 'SVTP', 'IC13', 'IC15'])
+    dataset_prefixes=['CUTE80', ])
 test_evaluator = val_evaluator
 
 auto_scale_lr = dict(base_batch_size=64 * 4)
